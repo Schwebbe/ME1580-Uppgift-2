@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 var pouchDB = require('pouchdb');
 
 //Här skapas en lokal databas variabel
-var database = new pouchDB("statistics");
+var database = new pouchDB("images");
 //Här skickas krypterad data till couchDB databasen
-var remoteCouch = new pouchDB("http://localhost:5984/statistics");
+var remoteCouch = new pouchDB("http://localhost:5984/images");
 
 sync();
 function sync() {
@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 
 });
 //Kör alla databas variabler och inkludera alla dokument som ska vara = sant
-app.get("/statistics", function (req, res) {
+app.get("/images", function (req, res) {
     database.allDocs({
         include_docs: true
     }).then(function (result) {
