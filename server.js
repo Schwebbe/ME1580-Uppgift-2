@@ -9,10 +9,6 @@ var pouchDB = require('pouchdb');
 //Här skapas en lokal databas variabel
 var database = new pouchDB("http://localhost:5985/images");
 
-
-
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 //Här används en json-tolkare
 app.use(bodyParser.json());
@@ -24,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.get('/', function (req, res) {
     if (!error) {
         console.log('Loaded...');
-        res.send('index.html');
+        res.send('admin.html');
     } else {
         return res.status(400).send({
             "status": "error",
@@ -75,5 +71,8 @@ app.put("/images/:id", function (req, res) {
 app.listen(4000, function (error) {
     if (!error) {
         console.log('Server is running on port 4000');
+    }
+    else {
+        console.log('ERROR!');
     }
 });

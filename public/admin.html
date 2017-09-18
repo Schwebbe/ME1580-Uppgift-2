@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+        <!--CB-modal -->
+        <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modaldark">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span style="color:white;" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- JS code -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
+        </script>
+
+
+        <!-- container -->
+        <div class="container">
+            <div class="row">
+                <div class="mx-auto">
+                    <h1 class="title text-center"><img src="img/logo.png" alt=""> &nbsp; &nbsp;vertos</h1>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <table class="table table-inverse tablestyle">
+                    <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#myModal">
+                        +  New Image
+                    </button>
+
+
+                    <tr>
+                        <th style="padding: 10px;">
+                            <h5 style="text-align:center;">ID</h5>
+                        </th>
+                        <th style="padding: 10px;">
+                            <h5 style="text-align:center;">Title</h5>
+                        </th>
+                        <th style="padding: 10px;">
+                            <h5 style="text-align:center;">Subtext</h5>
+                        </th>
+                        <th style="padding: 10px;">
+                            <h5 style="text-align: center;">Uploaded by</h5>
+                        </th>
+                        <th style="padding: 10px;">
+                            <h5 style="text-align:center;">Image</h5>
+                        </th>
+                        <th style="padding: 10px;">
+                            <h5 style="text-align:center;">Email</h5>
+                        </th>
+                    </tr>
+                    <th>
+                        <p></p>
+
+                    </th>
+                    <th>
+                        <p></p>
+
+                    </th>
+                    <th>
+                        <p></p>
+                    </th>
+                    <th>
+                        <p></p>
+                    </th>
+                    <th>
+                        <p></p>
+                    </th>
+                    <th>
+                        <p></p>
+                    </th>
+
+                </table>
+
+            </div>
+        </div>
+
+
+    </body>
+    <script>
+$('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').focus()
+})
+
+    </script>
+
+    <script>
+//Denna kod skriver ut JSON datan från databasen i ett table
+$(document).ready(function() {
+    $.getJSON("http://localhost:4000/images", function(data) {
+        var json = data;
+        var tr;
+        for (var i = 0; i < json.length; i++) {
+            tr = $('<tr/>');
+            tr.append("<td class='id centertxt'>" + json[i]._id + "</td>");
+            tr.append("<td class='centertxt'>" + json[i].firstname + "</td>");
+            tr.append("<td class='centertxt'>" + json[i].lastname + "</td>");
+            tr.append("<td class='centertxt'>" + json[i].image + "</td>");
+            tr.append("<button type='button' class='del btn btn-outline-danger my-2 my-sm-0'><td>" + "Delete" + "</td></button>");
+            $('table').append(tr);
+
+            //Delete knapp för varje kolumn
+            $('.del').click(function() {
+                // Pull out ID.
+                var row = $(this).closest("tr"); // Find the row.
+                var text = row.find(".id").text(); // Find the row's content (ID).
+                //Ajax delete funktion, HTML har bara post och get
+                $.ajax({ 
+                    type: 'DELETE',
+                    url: 'http://192.168.48.241:4000/images' + text
+                });
+                window.location.reload();
+            });
+        };
+    });
+});
+
+
+    </script>
+
+</html>
