@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 app.get('/admin', function(req, res){
     if (!error) {
         console.log('Welcome Admin!');
-        res.send('admin.html');
+        res.sendFile((path.join(__dirname, 'public/admin.html')));
     } else {
         return res.status(400).send({
             "status": "WARNING!",
