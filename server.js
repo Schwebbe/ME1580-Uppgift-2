@@ -11,12 +11,7 @@ var database = new pouchDB("http://localhost:5985/images");
 
 
 
-sync();
-function sync() {
-    var opts = {live: true};
-    database.replicate.to(remoteCouch, opts);
-    database.replicate.from(remoteCouch, opts);
-} 
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 //Här används en json-tolkare
