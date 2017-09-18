@@ -29,6 +29,17 @@ app.get('/', function (req, res) {
     }
 
 });
+app.get('/admin', function(req, res){
+    if (!error) {
+        console.log('Welcome Admin!');
+        res.send('admin.html');
+    } else {
+        return res.status(400).send({
+            "status": "WARNING!",
+            "message": "Unauthorized access!!"
+        });
+    }
+});
 //Kör alla databas variabler och inkludera alla dokument som ska vara = sant
 app.get("/images", function (req, res) {
     database.allDocs({
