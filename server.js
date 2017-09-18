@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.get('/', function (req, res) {
     if (!error) {
         console.log('Loaded...');
-        res.send('admin.html');
+        res.send('index.html');
     } else {
         return res.status(400).send({
             "status": "error",
@@ -46,7 +46,7 @@ app.post("/images", function (req, res) {
     database.post(req.body).then(function (result) {
         //Detta kommando gör så att när post requesten skickas itll servern, so respondar den med
         //att refresha sidan via detta direktiv som anges
-        res.sendFile((path.join(__dirname, '/public/admin.html')));
+        res.sendFile((path.join(__dirname, '/public/index.html')));
     });
 });
 //Här tas data bort från customers och returnerar resultaten från databasen 
